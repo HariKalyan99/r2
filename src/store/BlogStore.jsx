@@ -51,7 +51,7 @@ const BlostStoreProvider = ({ children }) => {
     const { signal } = controller;
     const fetchPosts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:8081/posts", signal);
+        const { data } = await axios.get("http://localhost:8082/posts/all", signal);
         dispatchPostReducerFn({
           type: "INITIAL_POSTS",
           payload: {
@@ -74,9 +74,8 @@ const BlostStoreProvider = ({ children }) => {
   useEffect(() => {
     const postBlogs = async (newPost) => {
       try {
-        const { data } = await axios.post("http://localhost:8081/posts", {
-          ...newPost,
-          id: uuid(),
+        const { data } = await axios.post("http://localhost:8082/posts/post/add", {
+          ...newPost
         });
         dispatchPostReducerFn({
           type: "ADD_POSTS",
@@ -99,8 +98,9 @@ const BlostStoreProvider = ({ children }) => {
 
   useEffect(() => {
     const deleteBlogs = async (id) => {
+      console.log(id)
       try {
-        await axios.delete(`http://localhost:8081/posts/${id}`);
+        await axios.delete(`http://localhost:8082/posts/post/remove/${id}`);
         // setPostList(postList.filter((x) => x.id !== id));
         dispatchPostReducerFn({
           type: "DEL_POSTS",
@@ -113,7 +113,7 @@ const BlostStoreProvider = ({ children }) => {
       }
     };
 
-    if (getDelPost?.length) {
+    if (getDelPost > 0) {
       deleteBlogs(getDelPost);
     }
   }, [getDelPost]);
@@ -124,19 +124,17 @@ const BlostStoreProvider = ({ children }) => {
       title,
       body,
       reactions,
-      tags,
       views,
       prevId,
     }) => {
       try {
         const { data } = await axios.put(
-          `http://localhost:8081/posts/${prevId}`,
+          `http://localhost:8082/posts/post/update/${prevId}`,
           {
             userId,
             title,
             body,
             reactions,
-            tags,
             views,
           }
         );

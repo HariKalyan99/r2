@@ -5,9 +5,7 @@ const CreatePost = () => {
   const userIdRef = useRef("");
   const titleRef = useRef("");
   const bodyRef = useRef("");
-  const likesRef = useRef("");
-  const disLikesRef = useRef("");
-  const tagsRef = useRef("");
+  const reactionsRef = useRef("");
   const viewsRef = useRef("");
 
   const { sideBarToggle, addPosts } = useContext(blogStore);
@@ -17,17 +15,14 @@ const CreatePost = () => {
     const userId = Number(userIdRef.current.value);
     const title = titleRef.current.value;
     const body = bodyRef.current.value;
-    const likes = Number(likesRef.current.value);
-    const dislikes = Number(disLikesRef.current.value);
-    const tags = tagsRef.current.value.split("#");
+    const reactions = Number(reactionsRef.current.value);
     const views = Number(viewsRef.current.value);
 
     addPosts({
       userId,
       title,
       body,
-      reactions: { likes, dislikes },
-      tags,
+      reactions,
       views,
     });
   };
@@ -83,11 +78,11 @@ const CreatePost = () => {
             ref={bodyRef}
           />
 
-          <label htmlFor="likes">Likes</label>
+          <label htmlFor="reactions">Reactions</label>
           <input
             type="number"
-            placeholder="enter likes"
-            id="likes"
+            placeholder="enter reactions"
+            id="reactions"
             style={{
               width: "400px",
               height: "3rem",
@@ -95,38 +90,9 @@ const CreatePost = () => {
               border: "1px solid black",
               padding: "1rem",
             }}
-            ref={likesRef}
+            ref={reactionsRef}
           />
 
-          <label htmlFor="dislikes">Dislikes</label>
-          <input
-            type="number"
-            placeholder="enter dislikes"
-            id="dislikes"
-            style={{
-              width: "400px",
-              height: "3rem",
-              borderRadius: "2px",
-              border: "1px solid black",
-              padding: "1rem",
-            }}
-            ref={disLikesRef}
-          />
-
-          <label htmlFor="tags">Tags</label>
-          <input
-            type="text"
-            placeholder="enter # before a tag"
-            id="tags"
-            style={{
-              width: "400px",
-              height: "3rem",
-              borderRadius: "2px",
-              border: "1px solid black",
-              padding: "1rem",
-            }}
-            ref={tagsRef}
-          />
 
           <label htmlFor="views">Views</label>
           <input
