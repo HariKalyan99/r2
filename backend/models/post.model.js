@@ -63,8 +63,10 @@ export const editPost = async({title, body, reactions, views, userId}, id) => {
         if(currentPost?.length === 0){
             return {error: "Post not found"};
         }else{
-            const [data] = await pool.query(`update posts set title = ?, body = ?, reactions = ?, views = ?, userId = ? where posts.id = ?`, [title || currentPost[0].title, body || currentPost[0].body, reactions || currentPost[0].reactions, views || currentPost[0].views, userId || currentPost[0].userId, id]);
-            return {id: data.insertId, title, body, reactions, views, userId};
+            let prevId = id;
+            const [data] = await pool.query(`update posts set title = ?, body = ?, reactions = ?, views = ?, userId = ? where posts.id = ${id}`, [title || currentPost[0].title, body || currentPost[0].body, reactions || currentPost[0].reactions, views || currentPost[0].views, userId || currentPost[0].userId]);
+            console.log(data, id, prevId);
+            return {id, title, body, reactions, views, userId};
         }
         
     } catch (error) {

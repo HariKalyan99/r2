@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
    <>
    {sideBarToggle === 
-    "dashboard" && <div className="album py-5 bg-body-tertiary">
+    "dashboard" && <div className="album py-5 bg-body-tertiary" style={{width: "100%"}}>
     <div className="container-fluid">
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"  >
         {postList.map((post, ind) => <PostCard key={ind} post={post} />)}

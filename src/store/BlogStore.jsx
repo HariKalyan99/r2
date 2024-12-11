@@ -98,7 +98,6 @@ const BlostStoreProvider = ({ children }) => {
 
   useEffect(() => {
     const deleteBlogs = async (id) => {
-      console.log(id)
       try {
         await axios.delete(`http://localhost:8082/posts/post/remove/${id}`);
         // setPostList(postList.filter((x) => x.id !== id));
@@ -138,12 +137,6 @@ const BlostStoreProvider = ({ children }) => {
             views,
           }
         );
-        // postList.splice(
-        //   postList.findIndex((x) => x.id === prevId),
-        //   1,
-        //   data
-        // );
-
         dispatchPostReducerFn({
           type: "EDIT_POSTS",
           payload: {

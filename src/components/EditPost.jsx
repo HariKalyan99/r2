@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const EditPost = ({displayEdit, post, editPosts}) => {
     const [getUserId, setUserId] = useState(post.userId);
@@ -8,6 +8,7 @@ const EditPost = ({displayEdit, post, editPosts}) => {
     const [getViews, setViews] = useState(post.views);
 
    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const userId = Number(getUserId);

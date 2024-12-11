@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import EditPost from "./EditPost";
 import { blogStore } from "../store/BlogStore";
 
@@ -10,8 +10,10 @@ const PostCard = ({ post }) => {
     const {delPosts, editPosts} = useContext(blogStore)
     const displayEdit = () => {
         setShowEdit(!showEdit);
+        
     }
 
+    
     
   return (
     <div className="col" style={{ height: "800px" }}>
